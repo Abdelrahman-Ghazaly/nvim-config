@@ -18,10 +18,7 @@ return {
 			local lsp_config = require("lspconfig")
 			require("mason").setup()
 			require("mason-lspconfig").setup({
-				ensure_installed = {
-					-- dart sdk ships with LSP
-					"lua_ls",
-				},
+				ensure_installed = {},
 			})
 
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -120,20 +117,20 @@ return {
 				capabilities = capabilities,
 				settings = {
 					Lua = {
-            -- runtime = {
-            --   version = "LuaJIT",
-            -- },
+						-- runtime = {
+						--   version = "LuaJIT",
+						-- },
 						diagnostics = {
 							globals = { "vim" },
 						},
-            -- workspace = {
-            --   checkThirdParty = false,
-            --   library = {
-            --     '${3rd}/luv/library',
-            --     unpack(vim.api.nvim_get_runtime_rile("", true)),
-            --     vim.api.nvim_get_proc,
-            --   }
-            -- },
+						-- workspace = {
+						--   checkThirdParty = false,
+						--   library = {
+						--     '${3rd}/luv/library',
+						--     unpack(vim.api.nvim_get_runtime_rile("", true)),
+						--     vim.api.nvim_get_proc,
+						--   }
+						-- },
 					},
 				},
 			})
@@ -153,4 +150,3 @@ return {
 		},
 	},
 }
-
