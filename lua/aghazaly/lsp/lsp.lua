@@ -28,9 +28,6 @@ return {
       vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
       vim.keymap.set("n", "<leader>dl", vim.diagnostic.setqflist)
 
-      vim.keymap.set({ "n", "i" }, "<C-b>", function()
-        vim.lsp.inlay_hint(0, nil)
-      end)
 
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -96,6 +93,11 @@ return {
       }
 
       lsp_config["dartls"].setup({
+        on_attach = function(_, bufnr)
+          -- Enable folding
+          vim.api.nvim_buf_set_option(bufnr, 'foldmethod', 'expr')
+          vim.api.nvim_buf_set_option(bufnr, 'foldexpr', 'nvim_treesitter#foldexpr()')
+        end,
         capabilities = capabilities,
         cmd = {
           "dart",
