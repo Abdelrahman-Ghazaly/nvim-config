@@ -4,6 +4,7 @@ return {
   config = function()
     local transparent = false -- set to true if you would like to enable transparency
 
+    -- Old Theme
     local bg = "#011628"
     local bg_dark = "#011423"
     local bg_highlight = "#143652"
