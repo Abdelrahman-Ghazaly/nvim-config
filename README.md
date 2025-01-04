@@ -1,5 +1,9 @@
 ## TODO:
+
 - Add neotest
+  - Added, but still some styling to make it usable
 - Add flutter-tools.nvim
-- Need to look into the LSP AGAIN!!!!
+  - This will need some changes to the LSP as well
 - Recheck trouble
+- Need to look into the LSP AGAIN!!!!
+- check the delay issue with which key

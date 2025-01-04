@@ -35,3 +35,20 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- turn off swapfile
 opt.swapfile = false
+
+-- Automatically save and restore folds per file
+vim.cmd([[
+  augroup RememberFolds
+    autocmd!
+    autocmd BufWinLeave * silent! mkview
+    autocmd BufWinEnter * silent! loadview
+  augroup END
+]])
+
+-- Automatically open all folds when opening a file if no view exists
+vim.api.nvim_create_autocmd("BufReadPost", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("normal! zR") -- Open all folds
+  end,
+})

@@ -1,46 +1,31 @@
 return {
-  "folke/tokyonight.nvim",
-  priority = 1000,
+  "rose-pine/neovim",
+  name = "rose-pine",
+
   config = function()
-    local transparent = false -- set to true if you would like to enable transparency
+    require("rose-pine").setup({
+      dark_variant = "moon",
+      light_variant = "dawn",
+    })
 
-    -- Old Theme
-    local bg = "#011628"
-    local bg_dark = "#011423"
-    local bg_highlight = "#143652"
-    local bg_search = "#0A64AC"
-    local bg_visual = "#275378"
-    local fg = "#CBE0F0"
-    local fg_dark = "#B4D0E9"
-    local fg_gutter = "#627E97"
-    local border = "#547998"
+    local auto_dark_mode = require("auto-dark-mode")
 
-    require("tokyonight").setup({
-      style = "night",
-      transparent = transparent,
-      styles = {
-        sidebars = transparent and "transparent" or "dark",
-        floats = transparent and "transparent" or "dark",
-      },
-      on_colors = function(colors)
-        colors.bg = bg
-        colors.bg_dark = transparent and colors.none or bg_dark
-        colors.bg_float = transparent and colors.none or bg_dark
-        colors.bg_highlight = bg_highlight
-        colors.bg_popup = bg_dark
-        colors.bg_search = bg_search
-        colors.bg_sidebar = transparent and colors.none or bg_dark
-        colors.bg_statusline = transparent and colors.none or bg_dark
-        colors.bg_visual = bg_visual
-        colors.border = border
-        colors.fg = fg
-        colors.fg_dark = fg_dark
-        colors.fg_float = fg
-        colors.fg_gutter = fg_gutter
-        colors.fg_sidebar = fg_dark
+    auto_dark_mode.setup({
+      update_interval = 1000,
+      set_dark_mode = function()
+        vim.api.nvim_set_option("background", "dark")
+        vim.api.nvim_command("colorscheme rose-pine")
+      end,
+      set_light_mode = function()
+        vim.api.nvim_set_option("background", "light")
+        vim.api.nvim_command("colorscheme rose-pine")
       end,
     })
 
-    vim.cmd("colorscheme tokyonight")
+    auto_dark_mode.init()
   end,
+
+  dependencies = {
+    "f-person/auto-dark-mode.nvim",
+  },
 }
