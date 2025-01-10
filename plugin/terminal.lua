@@ -28,7 +28,7 @@ end
 
 vim.api.nvim_create_user_command("ToggleTerminal", function()
   if not vim.api.nvim_win_is_valid(state.win) then
-    state = create_terminal { buf = state.buf }
+    state = create_terminal { buf = state.buf, height = 15, }
     if vim.bo[state.buf].buftype ~= "terminal" then
       vim.cmd.term()
     end
