@@ -1,15 +1,16 @@
 return {
   "j-hui/fidget.nvim",
-  opts = {},
+  opts = {
+    text = {
+       spinner = "dots",
+    },
+   window = {
+     blend = 0,
+     border = "rounded",
+    },
+  },
   config = function()
     require("fidget").setup {
-      text = {
-        spinner = "dots",
-      },
-      window = {
-        blend = 0,
-        border = "rounded",
-      },
     }
   end
 }
