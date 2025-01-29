@@ -9,7 +9,6 @@ return {
   config = function()
     local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-
     local function toggle_log()
       local wins = vim.api.nvim_list_wins()
 
@@ -21,7 +20,7 @@ return {
       end
 
       pcall(function()
-        vim.api.nvim_command 'split + __FLUTTER_DEV_LOG__ | resize 15'
+        vim.api.nvim_command 'bot split + __FLUTTER_DEV_LOG__ | resize 15'
       end)
     end
 
@@ -42,13 +41,28 @@ return {
         enabled = true,
         exception_breakpoints = { "raised" },
         register_configurations = function(_)
-          require("dap").configurations.dart = {}
+          local dap = require("dap")
+          dap.configurations.dart = {}
           require("dap.ext.vscode").load_launchjs()
+          
+          -- Add default configuration if none exists
+          if not dap.configurations.dart or #dap.configurations.dart == 0 then
+            dap.configurations.dart = {
+              {
+                type = "dart",
+                request = "launch",
+                name = "Launch Flutter Program",
+                program = "${workspaceFolder}/lib/main.dart",
+                cwd = "${workspaceFolder}",
+                toolArgs = { "-d", "macos" }, -- Adjust device target as needed
+              }
+            }
+          end
         end,
       },
       dev_log = {
         enabled = true,
-        open_cmd = "15split",
+        open_cmd = "bot 15split", -- Changed to open at bottom
       },
       widget_guides = {
         enabled = false,
@@ -77,5 +91,3 @@ return {
     }
   end,
 }
---[[
-]] --
