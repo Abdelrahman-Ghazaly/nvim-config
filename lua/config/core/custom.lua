@@ -14,3 +14,19 @@ vim.api.nvim_create_autocmd('TermOpen', {
     vim.opt.relativenumber = false
   end,
 })
+
+-- For testing, use a 5-second interval
+local test_interval = 5000
+local final_interval = 8 * 3600 * 1000  -- 8 hours in ms
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    print("VimEnter: Setting up Typr timer")
+    vim.fn.timer_start(final_interval, function()
+      vim.schedule(function()
+        print("Timer triggered, running Typr")
+        vim.cmd("Typr")
+      end)
+    end, {["repeat"] = -1}) 
+  end,
+})

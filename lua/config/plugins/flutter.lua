@@ -51,10 +51,10 @@ return {
               {
                 type = "dart",
                 request = "launch",
-                name = "Launch Flutter Program",
+                name = "${workspaceFolderBasename} - Debug",
                 program = "${workspaceFolder}/lib/main.dart",
                 cwd = "${workspaceFolder}",
-                toolArgs = { "-d", "macos" }, -- Adjust device target as needed
+                toolArgs = {},
               }
             }
           end
