@@ -44,7 +44,7 @@ return {
           local dap = require("dap")
           dap.configurations.dart = {}
           require("dap.ext.vscode").load_launchjs()
-          
+
           -- Add default configuration if none exists
           if not dap.configurations.dart or #dap.configurations.dart == 0 then
             dap.configurations.dart = {
@@ -68,7 +68,23 @@ return {
         enabled = false,
       },
       lsp = {
+        autostart = true,
         capabilities = capabilities,
+        on_attach = function(client, buffer) -- <-- Use on_attach instead of LspAttach autocmd
+          -- Format-on-save handler
+          if client.supports_method("textDocument/formatting") then
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              buffer = buffer,
+              callback = function()
+                -- Check if client is still active before formatting
+                local active_clients = vim.lsp.get_active_clients({ bufnr = buffer })
+                if vim.tbl_contains(active_clients, client) then
+                  vim.lsp.buf.format({ bufnr = buffer })
+                end
+              end,
+            })
+          end
+        end,
         init_options = {
           onlyAnalyzeProjectsWithOpenFiles = true,
           suggestFromUnimportedLibraries = true,
@@ -78,10 +94,10 @@ return {
           showTodos = true,
           completeFunctionCalls = true,
           analysisExcludedFolders = {
-            "$HOME/AppData/Local/Pub/Cache",
-            "$HOME/.pub-cache",
+            vim.fn.expand("$HOME/AppData/Local/Pub/Cache"),
+            vim.fn.expand("$HOME/.pub-cache"),
             "/opt/homebrew/",
-            "$HOME/tools/flutter/",
+            vim.fn.expand("$HOME/tools/flutter/"),
           },
           renameFilesWithClasses = "prompt",
           enableSnippets = true,

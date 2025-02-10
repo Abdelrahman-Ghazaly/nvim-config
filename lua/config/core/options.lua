@@ -28,3 +28,5 @@ set.clipboard:append("unnamedplus") -- use system clipboard as default register
 set.splitright = true               -- split vertical window to the right
 
 set.swapfile = false
+
+set.conceallevel = 1
