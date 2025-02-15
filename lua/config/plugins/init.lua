@@ -5,7 +5,7 @@ return {
     cmd = { "Typr", "TyprStats" },
     config = function()
       local typr = require("typr.state")
-      typr.linecount = 5
+      typr.linecount = 3
       typr.random = false
     end,
   },
