@@ -5,6 +5,7 @@ return {
     'nvim-lua/plenary.nvim',
     'stevearc/dressing.nvim',
     'mfussenegger/nvim-dap',
+    'saghen/blink.cmp',
   },
   config = function()
     local capabilities = require('blink.cmp').get_lsp_capabilities()
@@ -79,7 +80,7 @@ return {
             "/opt/homebrew/",
             vim.fn.expand("$HOME/tools/flutter/"),
           },
-          renameFilesWithClasses = "prompt",
+          renameFilesWithClasses = "always",
           enableSnippets = true,
           updateImportsOnRename = true,
         }
