@@ -11,7 +11,7 @@ return {
       vim.keymap.set('n', '<Leader>lp', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
       vim.keymap.set('n', '<Leader>dc', function() dap.repl.toggle() end)
       vim.keymap.set('n', '<Leader>bc', function() dap.clear_breakpoints() end)
-      vim.keymap.set('n', '<Leader>bl', function() 
+      vim.keymap.set('n', '<Leader>bl', function()
         local dap = require('dap')
         local session = dap.session()
         local qf_list = {}
@@ -48,7 +48,7 @@ return {
         end
 
         vim.fn.setqflist(qf_list)
-        vim.cmd('copen')  -- Open quickfix window
+        vim.cmd('copen') -- Open quickfix window
         vim.notify(string.format("Found %d breakpoints", #qf_list), vim.log.levels.INFO)
       end, { desc = 'List breakpoints in quickfix' })
     end
@@ -64,18 +64,18 @@ return {
 
       dapui.setup()
 
-      dap.listeners.before.attach.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.launch.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated.dapui_config = function()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited.dapui_config = function()
-        dapui.close()
-      end
+      -- dap.listeners.before.attach.dapui_config = function()
+      --   dapui.open()
+      -- end
+      -- dap.listeners.before.launch.dapui_config = function()
+      --   dapui.open()
+      -- end
+      -- dap.listeners.before.event_terminated.dapui_config = function()
+      --   dapui.close()
+      -- end
+      -- dap.listeners.before.event_exited.dapui_config = function()
+      --   dapui.close()
+      -- end
     end
   }
 }

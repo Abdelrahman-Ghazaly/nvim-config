@@ -6,6 +6,14 @@ return {
 
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
+
+  cmdline = {
+    enabled = true,
+    completion = {
+      menu = { auto_show = true },
+    }
+  },
+
   opts = {
     keymap = {
       preset = 'default',

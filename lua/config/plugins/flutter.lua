@@ -9,8 +9,17 @@ return {
   },
   config = function()
     local capabilities = require('blink.cmp').get_lsp_capabilities()
+    local flutter_tools = require("flutter-tools")
 
-    require("flutter-tools").setup {
+    vim.keymap.set("n", "<leader>Fs", "<cmd>FlutterRun<cr>", { desc = "Run Flutter project" })
+    vim.keymap.set("n", "<leader>Fq", "<cmd>FlutterQuit<cr>", { desc = "Quit Flutter project" })
+    vim.keymap.set("n", "<leader>Fe", "<cmd>FlutterDevices<cr>", { desc = "Open Flutter devices" })
+    -- vim.keymap.set("n", "<leader>Fe", "<cmd>FlutterEmulators<cr>", { desc = "Open Flutter emulators" })
+    vim.keymap.set("n", "<leader>Fr", "<cmd>FlutterReload<cr>", { desc = "Flutter Hot Reload" })
+    vim.keymap.set("n", "<leader>FR", "<cmd>FlutterRestart<cr>", { desc = "Flutter Hot Restart" })
+    vim.keymap.set("n", "<leader>Fd", "<cmd>FlutterOpenDevTools<cr>", { desc = "Open Flutter Dev Tools" })
+
+    flutter_tools.setup {
       ui = {
         border = "rounded",
         notification_style = 'fidget',
@@ -58,7 +67,7 @@ return {
               buffer = buffer,
               callback = function()
                 -- Check if client is still active before formatting
-                local active_clients = vim.lsp.get_active_clients({ bufnr = buffer })
+                local active_clients = vim.lsp.get_clients({ bufnr = buffer })
                 if vim.tbl_contains(active_clients, client) then
                   vim.lsp.buf.format({ bufnr = buffer })
                 end
