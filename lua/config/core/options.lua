@@ -1,32 +1,61 @@
-vim.g.mapleader = " "
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+vim.g.have_nerd_font = true
 
-local set = vim.opt
+local set = vim.o
 
 set.number = true
 set.relativenumber = true
 
-set.tabstop = 2       -- 2 spaces for tabs
-set.shiftwidth = 2    -- 2 spaces for indent width
-set.expandtab = true  -- expand tab to spaces
-set.autoindent = true -- copy indent from current line when starting new one
+set.tabstop = 2
+set.shiftwidth = 2
+set.expandtab = true
+set.autoindent = true
 
 set.wrap = false
 
-set.ignorecase = true -- ignore case when searching
-set.smartcase = true  -- if you include mixed case in your search, assumes you want case-sensitive
+set.ignorecase = true
+set.smartcase = true
 
 set.cursorline = true
 
 set.termguicolors = true
-set.background = "dark"             -- colorschemes that can be light or dark will be made dark
-set.signcolumn = "yes"              -- show sign column so that text doesn't shift
+set.background = 'dark'
+set.signcolumn = 'yes'
 
-set.backspace = "indent,eol,start"  -- allow backspace on indent, end of line or insert mode start position
+set.backspace = 'indent,eol,start'
 
-set.clipboard:append("unnamedplus") -- use system clipboard as default register
-
-set.splitright = true               -- split vertical window to the right
+set.splitright = true
 
 set.swapfile = false
 
 set.conceallevel = 1
+
+set.mouse = 'a'
+
+set.showmode = false
+
+set.breakindent = true
+
+set.undofile = true
+
+set.ignorecase = true
+set.smartcase = true
+
+set.signcolumn = 'yes'
+
+set.updatetime = 250
+
+set.timeoutlen = 300
+
+set.splitright = true
+set.splitbelow = true
+
+set.list = true
+
+set.inccommand = 'split'
+
+set.scrolloff = 15
+
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.clipboard:append 'unnamedplus'

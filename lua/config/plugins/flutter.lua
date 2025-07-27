@@ -11,13 +11,12 @@ return {
     local capabilities = require('blink.cmp').get_lsp_capabilities()
     local flutter_tools = require("flutter-tools")
 
-    vim.keymap.set("n", "<leader>Fs", "<cmd>FlutterRun<cr>", { desc = "Run Flutter project" })
-    vim.keymap.set("n", "<leader>Fq", "<cmd>FlutterQuit<cr>", { desc = "Quit Flutter project" })
-    vim.keymap.set("n", "<leader>Fe", "<cmd>FlutterDevices<cr>", { desc = "Open Flutter devices" })
-    -- vim.keymap.set("n", "<leader>Fe", "<cmd>FlutterEmulators<cr>", { desc = "Open Flutter emulators" })
-    vim.keymap.set("n", "<leader>Fr", "<cmd>FlutterReload<cr>", { desc = "Flutter Hot Reload" })
-    vim.keymap.set("n", "<leader>FR", "<cmd>FlutterRestart<cr>", { desc = "Flutter Hot Restart" })
-    vim.keymap.set("n", "<leader>Fd", "<cmd>FlutterOpenDevTools<cr>", { desc = "Open Flutter Dev Tools" })
+    vim.keymap.set("n", "<leader>fs", "<cmd>FlutterRun<cr>", { desc = "Run Flutter project" })
+    vim.keymap.set("n", "<leader>fq", "<cmd>FlutterQuit<cr>", { desc = "Quit Flutter project" })
+    vim.keymap.set("n", "<leader>fe", "<cmd>FlutterEmulators<cr>", { desc = "Open Flutter devices" })
+    vim.keymap.set("n", "<leader>fr", "<cmd>FlutterReload<cr>", { desc = "Flutter Hot Reload" })
+    vim.keymap.set("n", "<leader>fR", "<cmd>FlutterRestart<cr>", { desc = "Flutter Hot Restart" })
+    vim.keymap.set("n", "<leader>fd", "<cmd>FlutterOpenDevTools<cr>", { desc = "Open Flutter Dev Tools" })
 
     flutter_tools.setup {
       ui = {
@@ -37,8 +36,6 @@ return {
           local dap = require("dap")
           dap.configurations.dart = {}
           require("dap.ext.vscode").load_launchjs()
-
-          -- Add default configuration if none exists
           if not dap.configurations.dart or #dap.configurations.dart == 0 then
             dap.configurations.dart = {
               {
@@ -60,21 +57,6 @@ return {
       lsp = {
         autostart = true,
         capabilities = capabilities,
-        on_attach = function(client, buffer) -- <-- Use on_attach instead of LspAttach autocmd
-          -- Format-on-save handler
-          if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              buffer = buffer,
-              callback = function()
-                -- Check if client is still active before formatting
-                local active_clients = vim.lsp.get_clients({ bufnr = buffer })
-                if vim.tbl_contains(active_clients, client) then
-                  vim.lsp.buf.format({ bufnr = buffer })
-                end
-              end,
-            })
-          end
-        end,
         init_options = {
           onlyAnalyzeProjectsWithOpenFiles = true,
           suggestFromUnimportedLibraries = true,

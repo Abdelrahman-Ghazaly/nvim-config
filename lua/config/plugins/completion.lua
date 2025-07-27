@@ -1,19 +1,29 @@
 return {
   'saghen/blink.cmp',
-  dependencies = 'rafamadriz/friendly-snippets',
-
-  version = '*',
-
-  ---@module 'blink.cmp'
-  ---@type blink.cmp.Config
-
+  event = 'VimEnter',
+  version = '1.*',
+  dependencies = {
+    {
+      'L3MON4D3/LuaSnip',
+      version = '2.*',
+      build = (function()
+        if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
+          return
+        end
+        return 'make install_jsregexp'
+      end)(),
+      dependencies = {},
+      opts = {},
+    },
+    'folke/lazydev.nvim',
+    'rafamadriz/friendly-snippets',
+  },
   cmdline = {
     enabled = true,
     completion = {
       menu = { auto_show = true },
-    }
+    },
   },
-
   opts = {
     keymap = {
       preset = 'default',
@@ -26,15 +36,24 @@ return {
           end
         end,
         'snippet_forward',
-        'fallback'
+        'fallback',
       },
     },
-
     appearance = {
       use_nvim_cmp_as_default = true,
-      nerd_font_variant = 'mono'
+      nerd_font_variant = 'hack',
     },
-
-    signature = { enabled = true }
+    completion = {
+      documentation = { auto_show = false, auto_show_delay_ms = 500 },
+    },
+    sources = {
+      default = { 'lsp', 'path', 'snippets', 'lazydev' },
+      providers = {
+        lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+      },
+    },
+    snippets = { preset = 'luasnip' },
+    fuzzy = { implementation = 'lua' },
+    signature = { enabled = true },
   },
 }
