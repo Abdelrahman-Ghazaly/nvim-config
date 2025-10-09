@@ -8,8 +8,11 @@ return {
     'saghen/blink.cmp',
   },
   config = function()
-    local capabilities = require('blink.cmp').get_lsp_capabilities()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
     local flutter_tools = require("flutter-tools")
+
+    local util = require("lspconfig.util")
 
     vim.keymap.set("n", "<leader>fs", "<cmd>FlutterRun<cr>", { desc = "Run Flutter project" })
     vim.keymap.set("n", "<leader>fq", "<cmd>FlutterQuit<cr>", { desc = "Quit Flutter project" })
@@ -74,7 +77,15 @@ return {
           renameFilesWithClasses = "always",
           enableSnippets = true,
           updateImportsOnRename = true,
-        }
+        },
+        root_dir = function(fname)
+          local git_root = util.find_git_ancestor(fname)
+          if git_root then
+            return git_root
+          end
+
+          return util.root_pattern("pubspec.yaml")(fname)
+        end,
       }
     }
   end,

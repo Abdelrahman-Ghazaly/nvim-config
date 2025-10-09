@@ -9,6 +9,9 @@ return {
       vim.g.loaded_netrwPlugin = 1
 
       nvimtree.setup {
+        notify = {
+          threshold = vim.log.levels.OFF,
+        },
         view = {
           width = 35,
           relativenumber = true,

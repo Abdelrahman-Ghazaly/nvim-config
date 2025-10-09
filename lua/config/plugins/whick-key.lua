@@ -8,7 +8,7 @@ return {
     {
       "<leader>?",
       function()
-        require("which-key").show()
+        require("which-key").show("")
       end,
       desc = "Buffer Local Keymaps (which-key)",
     },

@@ -38,14 +38,14 @@ return {
       function()
         require('dap').repl.toggle()
       end,
-      desc = 'Debug: Toggle Breakpoint',
+      desc = 'Debug: Toggle REPL',
     },   
     {
       '<leader>bc',
       function()
         require('dap').clear_breakpoints()
       end,
-      desc = 'Debug: Toggle Breakpoint',
+      desc = 'Debug: Clear Breakpoints',
     },
     {
       '<leader>b',
