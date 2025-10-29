@@ -1,10 +1,5 @@
 return {
   {
-    "ellisonleao/glow.nvim",
-    cmd = "Glow",
-    config = true,
-  },
-  {
     "szw/vim-maximizer",
     keys = {
       { "<leader>ms", "<cmd>MaximizerToggle<CR>", desc = "Maximize/minimize a split" },
@@ -22,4 +17,11 @@ return {
   },
   { 'karb94/neoscroll.nvim',    opts = {}, },
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+  }
 }
